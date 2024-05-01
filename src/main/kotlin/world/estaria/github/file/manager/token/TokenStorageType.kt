@@ -1,6 +1,6 @@
 package world.estaria.github.file.manager.token
 
-import world.estaria.github.file.manager.token.kubernetes.GitHubTokenConfigMapHandler
+import world.estaria.github.file.manager.token.kubernetes.GitHubTokenSecretHandler
 import world.estaria.github.file.manager.token.local.GitHubTokenConfigLoader
 
 /**
@@ -11,8 +11,8 @@ enum class TokenStorageType {
 
     KUBERNETES {
         override fun getToken(): String {
-            val configMapHandler = GitHubTokenConfigMapHandler()
-            return configMapHandler.getConfig().token
+            val configMapHandler = GitHubTokenSecretHandler()
+            return configMapHandler.get()
         }
     },
 
