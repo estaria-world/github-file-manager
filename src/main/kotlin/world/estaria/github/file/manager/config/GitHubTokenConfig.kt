@@ -10,7 +10,7 @@ import world.estaria.github.file.manager.kubernetes.GitHubTokenSecretHandler
 @Serializable
 class GitHubTokenConfig(
     private val storageType: TokenStorageType,
-    private val token: String
+    private val token: String?
 ) {
 
     object Default {
@@ -25,7 +25,7 @@ class GitHubTokenConfig(
     fun getToken(): String {
         return when (this.storageType) {
             TokenStorageType.KUBERNETES -> GitHubTokenSecretHandler().get()
-            TokenStorageType.LOCAL -> this.token
+            TokenStorageType.LOCAL -> this.token ?: "empty"
         }
     }
 
