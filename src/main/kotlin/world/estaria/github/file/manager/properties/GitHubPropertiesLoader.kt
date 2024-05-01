@@ -1,7 +1,6 @@
-package world.estaria.github.file.manager.loader
+package world.estaria.github.file.manager.properties
 
-import world.estaria.github.file.manager.token.GitHubToken
-import world.estaria.github.file.manager.token.TokenStorageType
+import world.estaria.github.file.manager.GitHubToken
 import java.io.InputStreamReader
 import java.net.URI
 import java.net.URL
@@ -12,8 +11,7 @@ import java.util.*
  */
 
 class GitHubPropertiesLoader(
-    path: String,
-    tokenStorageType: TokenStorageType = TokenStorageType.KUBERNETES
+    path: String
 ) {
 
     val url: URL = URI("https://raw.githubusercontent.com/$path").toURL()
@@ -21,7 +19,7 @@ class GitHubPropertiesLoader(
 
     init {
         val connection = this.url.openConnection()
-        connection.setRequestProperty("Authorization", "token ${GitHubToken.getToken(tokenStorageType)}")
+        connection.setRequestProperty("Authorization", "token ${GitHubToken.getToken()}")
         properties.load(InputStreamReader(connection.getInputStream(), "UTF-8"))
     }
 

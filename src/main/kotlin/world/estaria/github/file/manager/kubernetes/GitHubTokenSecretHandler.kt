@@ -1,4 +1,4 @@
-package world.estaria.github.file.manager.token.kubernetes
+package world.estaria.github.file.manager.kubernetes
 
 import io.fabric8.kubernetes.client.KubernetesClientBuilder
 import world.estaria.github.file.manager.kubernetes.KubernetesSecrets

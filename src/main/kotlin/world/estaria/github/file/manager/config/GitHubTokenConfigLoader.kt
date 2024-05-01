@@ -1,8 +1,7 @@
-package world.estaria.github.file.manager.token.local
+package world.estaria.github.file.manager.config
 
 import world.avionik.configkit.ConfigLoader
 import world.avionik.configkit.format.YamlFileFormatter
-import world.estaria.github.file.manager.token.GitHubTokenConfig
 import java.io.File
 
 /**
@@ -14,5 +13,5 @@ class GitHubTokenConfigLoader : ConfigLoader<GitHubTokenConfig>(
     YamlFileFormatter(
         GitHubTokenConfig.serializer()
     ),
-    { GitHubTokenConfig("asd") }
+    { GitHubTokenConfig.Default.get() }
 )
