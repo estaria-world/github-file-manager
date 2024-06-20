@@ -1,6 +1,7 @@
 package world.estaria.github.file.manager.properties
 
 import world.estaria.github.file.manager.GitHubToken
+import java.io.FileNotFoundException
 import java.io.InputStreamReader
 import java.net.URI
 import java.net.URL
@@ -20,7 +21,12 @@ class GitHubPropertiesLoader(
     init {
         val connection = this.url.openConnection()
         connection.setRequestProperty("Authorization", "token ${GitHubToken.getToken()}")
-        properties.load(InputStreamReader(connection.getInputStream(), "UTF-8"))
+
+        try {
+            properties.load(InputStreamReader(connection.getInputStream(), "UTF-8"))
+        } catch (exception: FileNotFoundException) {
+            println("Failed to find url $url")
+        }
     }
 
 }
