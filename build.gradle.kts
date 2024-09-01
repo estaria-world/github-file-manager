@@ -8,31 +8,15 @@ plugins {
 }
 
 group = "world.estaria"
-version = "1.1.0"
+version = "1.2.0"
 
 repositories {
     mavenCentral()
-
-    // estaria dependencies
-    maven {
-        name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/estaria-world/kube-configmap-kit")
-        credentials {
-            username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
-            password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
-        }
-    }
 }
 
 dependencies {
     // avionik dependencies
     compileOnly("world.avionik:config-kit:1.0.2")
-
-    // kubernetes dependencies
-    compileOnly("io.fabric8:kubernetes-client:6.12.1")
-
-    // estaria dependencies
-    compileOnly("world.estaria:kube-configmap-kit:1.0.4")
 }
 
 tasks.named("shadowJar", ShadowJar::class) {
@@ -42,12 +26,9 @@ tasks.named("shadowJar", ShadowJar::class) {
 publishing {
     repositories {
         maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/estaria-world/github-file-manager")
-            credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
-                password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
-            }
+            name = "estaria"
+            url = uri("https://repo.estaria.world/releases")
+            credentials(PasswordCredentials::class.java)
         }
     }
     publications {
