@@ -8,6 +8,4 @@ enum class TokenStorageType {
 
     LOCAL,
 
-    KUBERNETES
-
 }

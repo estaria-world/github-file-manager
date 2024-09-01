@@ -1,7 +1,6 @@
 package world.estaria.github.file.manager.config
 
 import kotlinx.serialization.Serializable
-import world.estaria.github.file.manager.kubernetes.GitHubTokenSecretHandler
 
 /**
  * @author Niklas Nieberler
@@ -24,7 +23,6 @@ class GitHubTokenConfig(
 
     fun getToken(): String {
         return when (this.storageType) {
-            TokenStorageType.KUBERNETES -> GitHubTokenSecretHandler().get()
             TokenStorageType.LOCAL -> this.token ?: "empty"
         }
     }
